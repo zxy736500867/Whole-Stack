@@ -2,25 +2,14 @@
   <router-view></router-view>
 </template>
 
-<script setup>
+<script>
  export default {
-  name: 'App',
-  components: {
-    HelloWorld: () => import('./components/HelloWorld.vue'),
-  },
+    name: 'App',
+  }
 </script>
 
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
+<style lang="scss">
+@import "./assets/style/reset.css";
+@import "./assets/style/index.scss";
 </style>
