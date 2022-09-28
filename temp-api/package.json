@@ -1,0 +1,21 @@
+{
+  "name": "temp-api",
+  "version": "1.0.0",
+  "description": "api dev",
+  "main": "app.js",
+  "scripts": {
+    "dev": "nodemon app.js",
+    "qa": "npm run lint && npm run test",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "zxy",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.1",
+    "log4js": "^6.6.1",
+    "pg": "^8.8.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}

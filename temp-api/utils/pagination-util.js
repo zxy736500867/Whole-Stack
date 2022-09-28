@@ -1,4 +1,5 @@
 import {executeSQL} from "../config/db-config";
+import commonUtil from "./common-util";
 
 /**
  * 分页
@@ -9,9 +10,7 @@ import {executeSQL} from "../config/db-config";
  * @param index: 参数索引
  * @return {string}: limit语句
  */
-
-
-const pagination = async (sqlStr, params = null, pageNo = '1', pageSize = '10', index = 1) => {
+const paginationUtil = async (sqlStr, params = null, pageNo = '1', pageSize = '10', index = 1) => {
     const count = await executeSQL(`SELECT count(1) from (${sqlStr}) count`, params)
     console.log('---count', count)
     if (commonUtil.isNotNumberObject(pageNo)) {
@@ -42,3 +41,5 @@ const pagination = async (sqlStr, params = null, pageNo = '1', pageSize = '10', 
         total: Number(count[0].count),
     }
 }
+
+module.exports = paginationUtil
