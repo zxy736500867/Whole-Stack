@@ -8,12 +8,13 @@ import { ElMessage } from 'element-plus'
 
 // 创建axios实例
 const service = axios.create({
-    baseURL: config.baseURL,
+    baseURL: config.baseApiURL,
     timeout: 5000,
 })
 
 // request拦截器
 service.interceptors.request.use(req => {
+    console.log(req)
 
     //TODO: 请求拦截 一般用于处理token
     return req
@@ -46,6 +47,10 @@ function request(options) {
         options.params = options.data
     }
 
+    if (typeof options.mock != 'undefined') {
+        config.mock = options.mock
+    }
+
     if (config.env === 'prod') {
         //开发环境
        service.defaults.baseURL = config.baseURL
@@ -53,21 +58,20 @@ function request(options) {
         //生产环境
         service.defaults.baseURL = config.mock ? config.mockUrl : config.baseURL
     }
+    return service(options)
 
     //链式调用
-    ['get', 'post', 'put', 'delete', 'head', 'options', 'patch'].forEach(method => {
-        request[method] = function (url, data, options) {
-            return request({
-                method,
-                url,
-                data,
-                ...options
-            })
-        }
-    })
-
-    return service(options)
 }
+['get', 'post', 'put', 'delete', 'head', 'options', 'patch'].forEach(method => {
+    request[method] = function (url, data, options) {
+        return request({
+            method,
+            url,
+            data,
+            ...options
+        })
+    }
+})
 
 export default request
 
